@@ -1,9 +1,6 @@
-import {subtract, lensIndex, curry, compose, concat} from 'ramda'
+import {lensIndex, curry, compose} from 'ramda'
 import {set} from 'ramda-lens'
-import {lensCreate, liberty, chain, head, ko, color, value, capturing} from './lenses'
-import {neighbor} from './neighbor'
-import {updateInfluence, updateSubordinate} from './updateSubordinate'
-import {updateEmptySpaceInfluence} from './updateEmptySpaceInfluence'
+import {lensCreate, liberty, head, ko, color, value, capturing} from './lenses'
 import {updateSelfChainLiberties} from './updateSelfChainLiberties'
 
 export const updateEnemiesChainMember = (coor, turns, isKo, oppChain, nextState) => {
@@ -11,7 +8,6 @@ export const updateEnemiesChainMember = (coor, turns, isKo, oppChain, nextState)
     return nextState
   }
   const [f, ...r] = oppChain
-  console.log('opp ->', nextState[coor[0]][coor[1]]);
   const lensTo = lensCreate(lensIndex(f[0].coor[0]),lensIndex(f[0].coor[1]))
   const lensToKo = lensCreate(lensIndex(coor[0]),lensIndex(coor[1]), ko)
   const lensToCapturing = lensCreate(lensIndex(coor[0]), lensIndex(coor[1]), capturing)
@@ -37,7 +33,6 @@ export const updateEnemiesChain = curry((coor, turns, opponents, currentState) =
   const headChain = currentState[first.head[0]][first.head[1]].chain
   const headChainCoor = headChain.map(x => [{coor:x}])
   const isKo = headChain.length === 1
-  console.log('found ko', opponents);
   const chainIsDead = (headChain.filter(x => {
     return currentState[x[0]][x[1]].liberty > 0
   }).length === 0)

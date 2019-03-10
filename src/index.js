@@ -2,7 +2,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import * as serviceWorker from './serviceWorker';
-import './index.css';
+// import './index.css';
 import LandingPage from './components/LandingPage'
 import {createStore} from 'redux'
 import {Provider} from 'react-redux'

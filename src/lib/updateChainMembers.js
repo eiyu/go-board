@@ -1,9 +1,7 @@
-import {subtract, lensIndex, curry, compose, concat} from 'ramda'
+import {lensIndex, curry, compose} from 'ramda'
 import {set} from 'ramda-lens'
-import {lensCreate, liberty, chain, head, tail} from './lenses'
-import {neighbor} from './neighbor'
-import {updateInfluence, updateSubordinate} from './updateSubordinate'
-import {updateEmptySpaceInfluence} from './updateEmptySpaceInfluence'
+import {lensCreate, chain, head, tail} from './lenses'
+import {updateInfluence} from './updateSubordinate'
 
 const _updatePartnerChainMember = (coor, turns, partnerStone, currentState) => {
   if(partnerStone === undefined || partnerStone.length === 0) {

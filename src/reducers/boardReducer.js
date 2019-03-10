@@ -1,6 +1,4 @@
 import {range} from 'lodash'
-import {onUpdate} from '../lib/move'
-
 const initialStoneState = {
   color: 'brown',
   liberty: 4,

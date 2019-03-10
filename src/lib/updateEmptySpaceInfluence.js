@@ -1,6 +1,6 @@
 // update influence
 import {set} from 'ramda-lens'
-import {lensIndex, curry, compose} from 'ramda'
+import {lensIndex, curry} from 'ramda'
 import {lensCreate, influence} from './lenses'
 
 export const updateEmptySpaceInfluence = curry((coor,turns, emptySpace, currentState) => {

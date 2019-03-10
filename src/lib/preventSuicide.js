@@ -2,7 +2,6 @@
 import {set} from 'ramda-lens'
 import {compose, lensIndex, curry} from 'ramda'
 import {lensCreate, suicide} from './lenses'
-import {neighbor} from './neighbor'
 import {updateSelfChainLiberties} from './updateSelfChainLiberties'
 const updatePartnersChainMember = (oppChain, nextState) => {
   if(oppChain.length === 0) {

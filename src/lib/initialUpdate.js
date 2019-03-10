@@ -1,4 +1,4 @@
-import {compose, curry, lensIndex} from 'ramda'
+import {compose, lensIndex} from 'ramda'
 import {set} from 'ramda-lens'
 import {value,color,head,liberty,chain, kos, capturings, lensCreate} from './lenses'
 

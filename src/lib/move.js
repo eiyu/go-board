@@ -1,16 +1,14 @@
-import {compose,lensIndex, curry, pipe, uniq} from 'ramda'
+import {lensIndex, pipe, uniq} from 'ramda'
 import {initialUpdate} from './initialUpdate'
 import {updateEmptySpaceInfluence} from './updateEmptySpaceInfluence'
 import {preventSuicide} from './preventSuicide'
-import {headUpdateSubordinates} from './headUpdateSubordinates'
 import {updateSubordinate} from './updateSubordinate'
 import {updateOpponent} from './updateOpponent'
 import {updateChainMembers} from './updateChainMembers'
 import {subordinatesUpdateHead} from './subordinatesUpdateHead'
 import {updateEnemiesChain} from './updateEnemiesChainMember'
-import {updateSelfChainLiberties} from './updateSelfChainLiberties'
 import {lensCreate, chain} from './lenses'
-import {set, mapped, over} from 'ramda-lens'
+import {over} from 'ramda-lens'
 import {neighbor,surround, initialLiberty, opps, subs, edge, emptySpace} from './neighbor'
 
 

@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import PropType from 'prop-types'
-import {putStone} from '../actions/boardActions'
 import {connect} from 'react-redux'
 class CustomStone extends Component {
 

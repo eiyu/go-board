@@ -1,11 +1,8 @@
 import React, {Component} from 'react'
 import PropType from 'prop-types'
-import Grid from './styled/Grid'
-import Row from './styled/Row'
-import Col from './styled/Col'
+import {Grid, Col, Row} from 'react-styled-flexboxgrid'
 import {Wraper} from './styled/Wraper'
 import CustomStone from './CustomStone'
-import {range} from 'lodash'
 import {initialize, putStone} from '../actions/boardActions'
 import {connect} from 'react-redux'
 import {ThemeProvider} from 'styled-components'
@@ -31,15 +28,11 @@ const theme = {
 }
 class CustomBoard extends Component {
 
-  // initBoard(size) {
-  //
-  // }
   componentDidMount() {
     // initiallize board state
     this.props.onInitialize()
   }
   render() {
-    console.log(360/9);
     return (
       <Wraper size={this.props.size}>
       <ThemeProvider theme={theme}>
@@ -69,7 +62,6 @@ CustomBoard.propType = {
 }
 
 const mapDispatchToProps = (dispatch,props, state) => {
-  // console.log('from b', props.board);
   return {
     onInitialize: () => dispatch(initialize(props.size)),
     onPutStone: (coor,turns) => putStone(dispatch,props.board)(coor,turns)
@@ -77,7 +69,3 @@ const mapDispatchToProps = (dispatch,props, state) => {
 }
 
 export default connect(null, mapDispatchToProps)(CustomBoard)
-
-
-//row style={{ width:"180px",paddingBottom :"0px", margin:"0px"}}key={`row-${x}`}
-// col  style={{backgroundColor: "#d2cb9c",padding :"0px", margin:"0px"}} key={`col-${y}${x}`}

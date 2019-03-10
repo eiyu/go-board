@@ -1,7 +1,7 @@
 
 import {set} from 'ramda-lens'
 import {lensIndex, curry, subtract} from 'ramda'
-import {lensCreate, influence, liberty} from './lenses'
+import {lensCreate, liberty} from './lenses'
 
 // iterate -> return next state
 export const updateOpponent = curry((coor,turns, oppStone, nextState) => {

@@ -1,20 +1,3 @@
-// import {set} from 'ramda-lens'
-// import {concat} from 'ramda'
-// import {lensToChain} from './lenses'
-
-// const partnerHeadChainUpdateCurrent = (coor, prevState, partnerStone, nextState) => {
-//   if(partnerStone.length === 0) {
-//     return nextState
-//   }
-//   const [first, ...rest] = partnerStone
-//
-//   const currentChain = nextState[coor[0]][coor[1]].chain
-//   const partnerChain = prevState[first.head[0]][first.head[1]].chain
-//   const updatedState = set(lensToChain, concat(currentChain,partnerChain))(nextState)
-//
-//   return partnerHeadChainUpdateCurrent(coor, prevState, rest, updatedState)
-// }
-
 
 import {set} from 'ramda-lens'
 import {lensIndex, curry, concat} from 'ramda'

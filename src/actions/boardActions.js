@@ -19,7 +19,6 @@ export const putStone = (dispatch, state) => (coor, turns) => {
     return void 0
   }
   // ko rules
-  console.log('next',nextMove);
   if(state[coor[0]][coor[1]].ko && nextMove.ko) {
     alert("ko!")
     return void 0

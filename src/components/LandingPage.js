@@ -1,13 +1,10 @@
 import React, {Component} from 'react';
 import PropType from 'prop-types'
 import {connect} from 'react-redux';
-import Board from './Board'
 import {Container} from './styled/Wraper'
 import CustomBoard from './CustomBoard'
 // import {removeStone, undo} from '../actions/playerActions'
 
-// constants
-const length = 19
 
 class LandingPage extends Component {
   render() {
@@ -26,17 +23,10 @@ LandingPage.propType = {
 }
 
 const stateToProps = (state, props) => {
-  const {game,silver,black, ...points} = state
-  // console.log(state);
+  const {game} = state
   return {
-    // points: points,
     turns: game.turns,
     board: state.board,
-    // lastMove: game.lastMove,
-    // silver,
-    // black,
-    // evaluate: game.evaluate
-
   }
 }
 

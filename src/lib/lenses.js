@@ -3,8 +3,6 @@ import {mapped} from 'ramda-lens'
 export const row = (row) => lensIndex(row)
 export const col = (col) => lensIndex(col)
 export const chain = lensProp('chain')
-export const enemiesChain = lensProp('enemiesChain')
-export const eyeOwner = lensProp('eyeOwner')
 export const head = lensProp('head')
 export const chainLiberty = lensProp('chainLiberty')
 export const opponent = lensProp('opponent')
