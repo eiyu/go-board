@@ -7,7 +7,11 @@ import {updateEmptySpaceInfluence} from './updateEmptySpaceInfluence'
 
 export const updateInfluence = curry((xy, nextCoor, turns, st) => {
   const empSpc = surround(xy).map(x => {
-    return x[0] >= 0 ? st[x[0]][x[1]] : undefined
+    // fix it
+    const boardSize = st.length
+    //  still any bug when big chain goes top to bottom chain or left to right
+    console.log(boardSize, x);
+    return (x[0] < 0 || x[0] > boardSize - 1 || x[1] > boardSize - 1) ? undefined : st[x[0]][x[1]]
   }).filter(x => x !== undefined && x.value === '+')
 
   return updateEmptySpaceInfluence(nextCoor, turns, empSpc, st)

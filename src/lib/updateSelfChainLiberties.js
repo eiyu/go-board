@@ -10,7 +10,10 @@ export const updateSelfChainLiberties = curry((turns, oppChain, st) => {
   const [f,...r] = oppChain
   // find opp neighbor of f
   const neigh = surround(f.coor)
-  const toBeAddedLib = neigh.map(x => {return (x[0] >= 0 && x[1] >= 0) ? st[x[0]][x[1]] : undefined})
+  // fix it
+  const boardSize = st.length
+  //  still any bug when big chain goes top to bottom chain or left to right
+  const toBeAddedLib = neigh.map(x => {return (x[0] >= 0 && x[0] <= boardSize - 1) ? st[x[0]][x[1]] : undefined})
   .filter(y => y !== undefined && y.color === turns)
   .map(x => x.coor)
   const addLib = (tba, nextState) => {

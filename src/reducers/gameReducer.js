@@ -8,7 +8,8 @@ const initialState = {
   whitePoints: 0,
   blackPoints: 0,
   blackGroups: {},
-  silverGroups: {}
+  silverGroups: {},
+  sizes: [6,9,13,19]
 }
 export const gameReducer = (state=initialState, action) => {
   switch (action.type) {

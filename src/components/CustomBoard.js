@@ -27,9 +27,7 @@ const theme = {
   }
 }
 class CustomBoard extends Component {
-
   componentDidMount() {
-    // initiallize board state
     this.props.onInitialize()
   }
   render() {
@@ -43,7 +41,7 @@ class CustomBoard extends Component {
             <Row key={`rw-${x}`}>
               {row.map((col,y) => {
                 return (
-                  <Col key={`st-${x}${y}`} lg={true} md={true} sm={true} xs={true}><CustomStone onMove={this.props.onPutStone} turns={this.props.turns} {...col} /></Col>
+                  <Col width="1px" key={`st-${x}${y}`} lg={true} md={true} sm={true} xs={true}><CustomStone onMove={this.props.onPutStone} turns={this.props.turns} {...col} /></Col>
                 )
               })}
             </Row>
