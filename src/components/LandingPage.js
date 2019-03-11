@@ -4,6 +4,7 @@ import {connect} from 'react-redux';
 import {Container} from './styled/Wraper'
 import CustomBoard from './CustomBoard'
 import {Grid, Row, Col} from 'react-styled-flexboxgrid'
+import {NavLink} from 'react-router-dom'
 // import {removeStone, undo} from '../actions/playerActions'
 import {ThemeProvider} from 'styled-components'
 const theme = {
@@ -28,25 +29,31 @@ const theme = {
 }
 
 class LandingPage extends Component {
+  componentWillUnmount() {
+
+  }
   render() {
     return (
       <Container>
-      {/*<Board silver={this.props.silver} black={this.props.black} evaluate={this.props.evaluate} turns={this.props.turns} points={this.props.points}/>*/}
       <ThemeProvider theme={theme}>
         <Grid>
         <Row>
-        <h1> Papan Igo </h1>
+        <Col><h1> Papan Igo </h1></Col>
         </Row>
         <Row>
-          <Col><CustomBoard board={this.props.board} turns={this.props.turns} size={this.props.sizes[0]} /></Col>
-           <Col>
-            <h3>Aturan Dasar</h3>
-            <ul>
-              <li>Dua Pemain (hitam dan putih) meletakkan batu di papan saling bergantian pada setiap gilirannya, dimulai dengan hitam terlebih dahulu dan putih mendapat komi 6,5 point diakhir permainan.</li>
-              <li>Batu igo diletakkan diatas titik perpotongan antar garis (bukan dikotak-kotaknya seperti catur)</li>
-              <li>Batu yang sudah diletakkan tidak boleh digerakkan atau diangkat kembali</li>
-            </ul>
-           </Col>
+          <Col><CustomBoard switching={true} board={this.props.board} turns={this.props.turns} size={13} /></Col>
+        </Row>
+        <Row>
+        <Col>
+         <h3>Aturan Dasar</h3>
+         <ul>
+           <li>Dua Pemain (hitam dan putih) meletakkan batu di papan saling bergantian pada setiap gilirannya, dimulai dengan hitam terlebih dahulu dan putih mendapat komi 6,5 point diakhir permainan.</li>
+           <li>Batu igo diletakkan diatas titik perpotongan antar garis (bukan dikotak-kotaknya seperti catur)</li>
+           <li>Batu yang sudah diletakkan tidak boleh digerakkan atau diangkat kembali</li>
+         </ul>
+        </Col>
+
+        <Col><NavLink to="/menangkap-batu"><button>Cara Menangkap Batu Lawan</button></NavLink></Col>
         </Row>
         </Grid>
         </ThemeProvider>
@@ -61,11 +68,8 @@ LandingPage.propType = {
 }
 
 const stateToProps = (state, props) => {
-  const {game} = state
   return {
-    sizes : game.sizes,
-    turns: game.turns,
-    board: state.board,
+    turns: state.game13.turns,
   }
 }
 

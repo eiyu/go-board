@@ -9,16 +9,15 @@ const initialState = {
   blackPoints: 0,
   blackGroups: {},
   silverGroups: {},
-  sizes: [6,9,13,19]
+  sizes: [6,9,13,19],
+  oppLiberty: 4,
 }
-export const gameReducer = (state=initialState, action) => {
+export const gameReducer = (size=19) => (state=initialState, action) => {
   switch (action.type) {
-    case 'TURN':
+    case `TURN${size}`:
       return state.turns === 'black' ? Object.assign({}, state, {turns: 'white'}) : Object.assign({}, state, {turns: 'black'})
-    case 'EVALUATE':
-      return state.evaluate === true ? Object.assign({}, state, {evaluate: false}) : Object.assign({}, state, {evaluate: true})
-    case 'LAST_MOVE' :
-      return Object.assign({}, state, {...state, lastMove: action.stone})
+      // case `CAPTURING${size}` :
+      // return Object.assign({}, state, {...state, oppLiberty: state.oppLiberty === 1 ? 4 : state.oppLiberty - 1})
     default:
       return state
   }

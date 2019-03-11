@@ -13,23 +13,51 @@ const initialStoneState = {
   enemiesChain: [],
   suicide: false,
 }
-const prepare = stone => length => {
+// for capturing tutorial
+const prepare = stone => (length, play=false) => {
     const size = range(length)
-    return size.map(x => {
+    return play ? size.map(x => {
+      return size.map(y => {
+        if((x===2 && y ===1) || (x===1 && y ===2) || (x===3 && y ===2) || (x===2 && y ===3)) {
+          return Object.assign({}, stone, {coor: [x,y], color: 'black'})
+        }
+        else {
+          return Object.assign({}, stone, {coor: [x,y]})
+        }
+      })
+    }) : size.map(x => {
       return size.map(y => {
         return Object.assign({}, stone, {coor: [x,y]})
       })
     })
 }
-const initilizeState = prepare(initialStoneState)
+const initializeState = prepare(initialStoneState)
 
-export const boardReducer = (state=[], action) => {
+export const boardSize = (size=19) => function boardReducer(state=initializeState(size), action) {
   switch (action.type) {
-    case 'INIT':
-      return initilizeState(action.length)
-    case 'MOVE':
+    case `MOVE${size}`:
       return action.nextState
     default:
       return state
   }
 }
+
+
+
+// higher order reducer
+// export const task = (name="") => {
+//   return function togglesReducer(state=initialState, action) {
+//     switch (action.type) {
+//       case `${SHOW_TASK_DETAILS}${name}`:
+//         return Object.assign({}, state, {
+//           show: state.show === false ? true : false,
+//           card: state.show === false ? action.card : {},
+//           id: state.show === false ? action.id : void 0,
+//           status: state.show === false ? name : void 0
+//         })
+//
+//       default:
+//         return state
+//     }
+//   }
+// }

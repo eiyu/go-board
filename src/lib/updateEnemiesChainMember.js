@@ -34,7 +34,6 @@ export const updateEnemiesChain = curry((coor, turns, opponents, currentState) =
   const headChainCoor = headChain.map(x => [{coor:x}])
   const isKo = headChain.length === 1
   const chainIsDead = (headChain.filter(x => {
-    console.log('capturing', headChain);
     return currentState[x[0]][x[1]].liberty > 0
   }).length === 0)
   const headChainNextState = (

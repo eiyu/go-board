@@ -2,9 +2,16 @@ import styled from 'styled-components'
 import {media} from './media'
 
 export const Wraper = styled.div`
+  margin-left: 0px;
+  padding-left:0px;
   width: ${({size}) => {return size * 19.1}}px;
   text-align: center;
+  .turns {
+    background-color: white;
+    margin-left: 0px;
+  }
   div {
+    cursor: pointer;
     text-indent: 0px;
     margin-left: 0.09rem;
     width: ${({size}) => {return size * 19.1}}px;
@@ -12,34 +19,32 @@ export const Wraper = styled.div`
   background-color: #dcca98;
   ${media.tablet`
   font-size: 12px;
-    width: ${({size}) => {return size * 14.1}}px;
+    width: ${({size}) => {return size * 15.1}}px;
     div {
       margin-left: 0.09rem;
-      width: ${({size}) => {return size * 14.1}}px;
+      width: ${({size}) => {return size * 15.1}}px;
     }
 
   `}
   ${media.phone`
   font-size: 12px;
-    width: ${({size}) => {return size * 14.1}}px;
-    div {
-      margin-left: 0.09rem;
-      width: ${({size}) => {return size * 14.1}}px;
-    }
-
   `}
 `
 
 export const Container = styled.div`
-  font-size: 1em;
-  h1 {
-    margin-left: 22px;
+  button {
+    background-color: blue;
+    color: white;
   }
+  font-size: 1em;
   .board-size {
     margin-left: 22px;
   }
   margin-top: 50px;
   ul {
+    width: 330px;
+  }
+  div .desc {
     width: 330px;
   }
   ${media.tablet`
@@ -48,16 +53,16 @@ export const Container = styled.div`
   `}
   ${media.phone`
     font-size: 0.7em;
-    margin-left: 30px;
-    select {
-      font-size: 9px;
-      border: 1px solid blue;
-      background-color: silver;
-      height: 12px;
-    }
+    margin-left: -40px;
+    width: 360px;
     ul {
       li{margin-left: -10px;}
       width: 200px;
+    }
+    button {
+      background-color: blue;
+      color: white;
+      float: right;
     }
   `}
 `

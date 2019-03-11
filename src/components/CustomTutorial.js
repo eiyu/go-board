@@ -3,13 +3,13 @@ import PropType from 'prop-types'
 import {Grid, Col, Row} from 'react-styled-flexboxgrid'
 import {Wraper} from './styled/Wraper'
 import CustomStone from './CustomStone'
-import {initialize, putStone} from '../actions/boardActions'
+import {initialize, putStone, whiteOnly} from '../actions/boardActions'
 import {connect} from 'react-redux'
 import {ThemeProvider} from 'styled-components'
 const theme = {
   flexboxgrid: {
     // Defaults
-    gridSize: 1, // columns
+    gridSize: 12, // columns
     gutterWidth: 0, // rem
     outerMargin: 0, // rem
     mediaQuery: 'only screen',
@@ -26,7 +26,7 @@ const theme = {
     },
   }
 }
-class CustomBoard extends Component {
+class CustomTutorial extends Component {
   componentDidMount() {
     this.props.onInitialize(this.props.play)
   }
@@ -42,15 +42,13 @@ class CustomBoard extends Component {
             <Row key={`rw-${x}`}>
               {row.map((col,y) => {
                 return (
-                  <Col key={`st-${x}${y}`} lg={true} md={true} sm={true} xs={true}><CustomStone switching={this.props.switching} play={this.props.play} onMove={this.props.onPutStone} turns={this.props.turns} {...col} size={this.props.size}/></Col>
+                  <Col key={`st-${x}${y}`} lg={true} md={true} sm={true} xs={true}><CustomStone play={this.props.play} onWhite={this.props.onWhiteOnly} onMove={this.props.onPutStone} turns={this.props.turns} {...col} /></Col>
                 )
               })}
             </Row>
             )
           })
         }
-
-
       </Grid>
       </ThemeProvider>
       </Wraper>
@@ -58,15 +56,16 @@ class CustomBoard extends Component {
   }
 }
 
-CustomBoard.propType = {
+CustomTutorial.propType = {
   size: PropType.number
 }
 
 const mapDispatchToProps = (dispatch,props, state) => {
   return {
     onInitialize: (play) => dispatch(initialize(props.size,play)),
-    onPutStone: (coor,turns, size, switching) => putStone(dispatch,props.board)(coor,turns, size, switching),
+    onPutStone: (coor,turns) => putStone(dispatch,props.board)(coor,turns),
+    onWhiteOnly: (coor, turns) => whiteOnly(dispatch,props.board)(coor, 'white')
   }
 }
 
-export default connect(null, mapDispatchToProps)(CustomBoard)
+export default connect(null, mapDispatchToProps)(CustomTutorial)
