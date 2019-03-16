@@ -19,6 +19,7 @@ export const MainContent = styled.div`
 
 export const TopNav = styled.div`
   height: 40px;
+  background-color: yellow;
   ${media.tablet`
     height: 40px;
   `}

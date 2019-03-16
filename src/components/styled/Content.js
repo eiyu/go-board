@@ -3,36 +3,16 @@ import styled from 'styled-components'
 
 import {media} from './AppWrapper'
 export const Content = styled.div`
-  text-align: center;
-  border: 1px solid silver;
-  padding-left: 2px;
-    img {
-      height: 180px;
-    }
-  div {
-  padding-left: 20px;
-
-  }
-  img {
-    width: 270px;
+  h1 {
+    margin-top: 0px;
   }
   ${media.big`
-    font-size: 1.2em;
   `}
   ${media.desktop`
-    font-size: 1.2em;
   `}
   ${media.tablet`
-    font-size: 0.9em;
   `}
   ${media.phone`
-
-    div{width: ${({size}) => {return size * 14.1}}px;
-    div {
-      margin-left: 0.09rem;
-      width: ${({size}) => {return size * 14.1}}px;
-    }}
-    font-size: 0.8em;
   `}
 `
 

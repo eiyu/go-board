@@ -5,30 +5,13 @@ import {Container} from './styled/Wraper'
 import CustomBoard from './CustomBoard'
 import {NavLink} from 'react-router-dom'
 import {putStone} from '../actions/boardActions'
-import {Grid, Row, Col} from 'react-styled-flexboxgrid'
-// import {removeStone, undo} from '../actions/playerActions'
-import {ThemeProvider} from 'styled-components'
-const theme = {
-  flexboxgrid: {
-    // Defaults
-    gridSize: 2, // columns
-    gutterWidth: 3, // rem
-    outerMargin: 3, // rem
-    mediaQuery: 'only screen',
-    container: {
-      sm: 46, // rem
-      md: 47, // rem
-      lg: 70  // rem
-    },
-    breakpoints: {
-      xs: 0,  // em
-      sm: 48, // em
-      md: 50, // em
-      lg: 75  // em
-    },
-  }
-}
+import {Row, Col} from 'react-styled-flexboxgrid'
 
+const selectedStyle = {
+  color: "white",
+  textDecoration: "none",
+  marginLeft: "10px",
+}
 class Ko extends Component {
   componentDidMount() {
     const moves = [
@@ -39,18 +22,16 @@ class Ko extends Component {
         this.props.onPutStone( move, (x%2===0 ? 'black':'white') ,6)
       })
     }
-    setTimeout(function(){ playing(moves) }, 500);
+    setTimeout(function(){ playing(moves) }, 0);
   }
   render() {
     return (
       <Container>
-      <ThemeProvider theme={theme}>
-        <Grid>
         <Row>
         <Col><h1> Peraturan Ko </h1></Col>
         </Row>
         <Row>
-          <Col><CustomBoard switching={true} board={this.props.board} turns={this.props.turns} size={this.props.size} /></Col>
+          <Col><CustomBoard switching={true} st={this.props.st} size={this.props.size} /></Col>
         </Row>
         <Row>
         <Col>
@@ -68,11 +49,10 @@ class Ko extends Component {
             <li>silahkan dicoba :)</li>
             <li>cukup refresh tab / tekan tombol ulang jika ingin mengulang</li>
           </ul>
+         <NavLink activeStyle={selectedStyle} to="/menangkap-batu"><Col lg={3} md={2} sm={3} xs={2}>Aturan dasar</Col></NavLink>
+         <NavLink activeStyle={selectedStyle} to="/next"><Col lg={3} md={2} sm={3} xs={2}>materi selanjutnya</Col></NavLink>
         </Col>
-        <Col><NavLink to="/"><button>Kembali</button></NavLink></Col>
         </Row>
-        </Grid>
-        </ThemeProvider>
       </Container>
     )
   }
@@ -86,7 +66,7 @@ Ko.propType = {
 
 const dispatchToProps = (dispatch, props) => {
   return {
-    onPutStone: (coor,turns, size, switching) => putStone(dispatch,props.board)(coor,turns, size, switching),
+    onPutStone: (coor,turns, size, switching) => putStone(dispatch,props.st.points)(coor,turns, size, switching),
     // onRemove: id => dispatch(removeStone(id)),
   }
 }

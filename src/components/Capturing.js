@@ -4,29 +4,14 @@ import {connect} from 'react-redux';
 import {Container} from './styled/Wraper'
 import {putStone} from '../actions/boardActions'
 import CustomBoard from './CustomBoard'
-import {Grid, Row, Col} from 'react-styled-flexboxgrid'
+import {Row, Col} from 'react-styled-flexboxgrid'
 import {NavLink} from 'react-router-dom'
-// import {removeStone, undo} from '../actions/playerActions'
-import {ThemeProvider} from 'styled-components'
-const theme = {
-  flexboxgrid: {
-    // Defaults
-    gridSize: 2, // columns
-    gutterWidth: 3, // rem
-    outerMargin: 3, // rem
-    mediaQuery: 'only screen',
-    container: {
-      sm: 46, // rem
-      md: 47, // rem
-      lg: 70  // rem
-    },
-    breakpoints: {
-      xs: 0,  // em
-      sm: 48, // em
-      md: 50, // em
-      lg: 75  // em
-    },
-  }
+
+
+const selectedStyle = {
+  color: "white",
+  textDecoration: "none",
+  marginLeft: "10px",
 }
 class Capturing extends Component {
 
@@ -35,14 +20,12 @@ class Capturing extends Component {
   }
   render() {
     return (
-      <Container>
-      <ThemeProvider theme={theme}>
-        <Grid>
+        <Container>
         <Row>
         <Col><h1> Menangkap Batu Lawan </h1></Col>
         </Row>
         <Row>
-          <Col><CustomBoard switching={false} history={this.props.history} play={1} board={this.props.board} turns={this.props.turns} size={this.props.size} /></Col>
+          <Col><CustomBoard switching={false} play={1} st={this.props.st} size={this.props.size} /></Col>
         </Row>
         <Row>
         <Col>
@@ -62,24 +45,24 @@ class Capturing extends Component {
            <li>Dalam contoh ini urutannya tidak menjadi masalah</li>
            <li>Setelah liberty batu putih habis maka batu tersebut dapat di ambil</li>
          </ul>
+        <NavLink activeStyle={selectedStyle} to="/aturan-dasar"><Col lg={3} md={2} sm={3} xs={2}>Aturan dasar</Col></NavLink>
+        <NavLink activeStyle={selectedStyle} to="/peraturan-ko"><Col lg={3} md={2} sm={3} xs={2}>Peraturan Ko</Col></NavLink>
         </Col>
-        <Col><NavLink to="/peraturan-ko"><button>Ko rules</button></NavLink></Col>
         </Row>
-        </Grid>
-        </ThemeProvider>
       </Container>
     )
   }
 }
 
-
 Capturing.propType = {
-  board: PropType.object
+  board: PropType.object,
+  turns: PropType.string,
+  size: PropType.number,
 }
 
 const dispatchToProps = (dispatch, props) => {
   return {
-    onPutStone: (coor,turns, size, switching) => putStone(dispatch,props.board)(coor,turns, size, switching),
+    onPutStone: (coor,turns, size, switching) => putStone(dispatch,props.st.points)(coor,turns, size, switching),
     // onRemove: id => dispatch(removeStone(id)),
   }
 }

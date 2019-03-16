@@ -9,15 +9,13 @@ class CustomStone extends Component {
   render() {
     return (
       <div
+      className="coordinate"
       key={this.props.coor}
-      style={{color:this.props.color, padding:0, margin:'0px', width:'0px'}}
       onClick={() => this.props.onMove(this.props.coor, this.props.turns, this.props.size, this.props.switching)}
       >
-      <span onClick={
-        () => this.props.value==='+'&&this.props.color!=='brown' ? this.props.onCapturing() : void 0
-      }>
-      {/*this.props.value==='+'&&this.props.color!=='brown' ? this.props.oppLiberty :*/ this.props.value}
-      </span></div>
+
+      {this.props.value === '+' ? '+' : <img src={`./${this.props.color}.png`} alt={this.props.color}/>}
+    </div>
     )
   }
 }
