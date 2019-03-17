@@ -15,7 +15,7 @@ const selectedStyle = {
 class Ko extends Component {
   componentDidMount() {
     const moves = [
-      [1,0],[2,0],[2,1],[3,1],[1,2],[2,2],[0,1],[5,4],[5,3],[4,5],[4,4]
+      [1,0],[2,0],[2,1],[3,1],[1,2],[2,2],[0,1],[5,4],[5,3],[4,5],[4,4],'pass'
     ]
     const playing = (moves) => {
       moves.forEach((move,x) => {
@@ -47,7 +47,7 @@ class Ko extends Component {
             <li>setelah hitam jalan barulah putih dapat memakan batu hitam yang ada di pojok kanan bawah</li>
             <li>di bagian pojok kiri atas terdapat kasus yang serupa</li>
             <li>silahkan dicoba :)</li>
-            <li>cukup refresh tab / tekan tombol ulang jika ingin mengulang</li>
+            <li>cukup refresh tab jika ingin mengulang</li>
           </ul>
          <NavLink activeStyle={selectedStyle} to="/menangkap-batu"><Col lg={3} md={2} sm={3} xs={2}>Menangkap batu lawan</Col></NavLink>
          <NavLink activeStyle={selectedStyle} to="/next"><Col lg={3} md={2} sm={3} xs={2}>Materi selanjutnya</Col></NavLink>

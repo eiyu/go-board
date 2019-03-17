@@ -40,7 +40,7 @@ class Capturing extends Component {
          <h3>Penjelasan</h3>
          <ul>
            <li>Batu putih diatas memiliki 4 liberty / nafas</li>
-           <li>Batu hitam diletakkan dititik liberty batu lawan</li>
+           <li>Batu hitam diletakkan tepat dititik liberty batu lawan</li>
            <li>Setelah tidak ada liberty yang tersisa batu lawan dapat diambil</li>
          </ul>
         </Col>
@@ -49,9 +49,7 @@ class Capturing extends Component {
         <Col>
          <h3>Langkah</h3>
          <ul>
-           <li>Letakan batu hitam di bagian atas, bawah, kiri dan kanan</li>
-           <li>Dalam contoh ini urutannya tidak menjadi masalah</li>
-           <li>Setelah liberty batu putih habis maka batu tersebut dapat di ambil</li>
+           <li>Letakan batu hitam di bagian atas batu putih untuk menangkap</li>
          </ul>
         <NavLink activeStyle={selectedStyle} to="/aturan-dasar"><Col lg={3} md={2} sm={3} xs={2}>Aturan dasar</Col></NavLink>
         <NavLink activeStyle={selectedStyle} to="/peraturan-ko"><Col lg={3} md={2} sm={3} xs={2}>Peraturan Ko</Col></NavLink>

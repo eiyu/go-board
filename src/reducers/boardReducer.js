@@ -18,7 +18,7 @@ const initialStoneState = {
 // fix state!!!
 const prepare = stone => (length) => {
     const size = range(0,length)
-    return {turns: 'black', count:0, points: size.map(x => {
+    return {last : [], turns: 'black', count:0, points: size.map(x => {
       return size.map(y => {
         return Object.assign({}, stone, {coor: [x,y]})
       })
@@ -29,9 +29,9 @@ const initializeState = prepare(initialStoneState)
 export const boardSize = (size=19) => function boardReducer(state=initializeState(size), action) {
   switch (action.type) {
     case `MOVE${size}`:
-      return Object.assign({}, state, {turns: state.turns === 'black' ? 'white' : 'black', count: state.count + 1, points: action.nextState})
+      return Object.assign({}, state, {last: action.lastMove, turns: state.turns === 'black' ? 'white' : 'black', count: state.count + 1, points: action.nextState})
     case `PASS${size}`:
-      return Object.assign({}, state, {...state, turns: state.turns === 'black' ? 'white' : 'black', count: state.count + 1})
+      return Object.assign({}, state, {...state, last: 'pass', turns: state.turns === 'black' ? 'white' : 'black', count: state.count + 1})
     default:
       return state
   }

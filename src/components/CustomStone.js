@@ -7,15 +7,15 @@ class CustomStone extends Component {
     return nextProps !== this.props
   }
   render() {
+    const lastMove = this.props.coor[0] === this.props.last[0] && this.props.coor[1] === this.props.last[1]
     return (
       <div
       className="coordinate"
       key={this.props.coor}
       onClick={() => this.props.onMove(this.props.coor, this.props.turns, this.props.size, this.props.switching)}
       >
-
-      {this.props.value === '+' ? '+' : <img src={`./${this.props.color}.png`} alt={this.props.color}/>}
-    </div>
+      {this.props.value === '+' ? '+' : <img src={ lastMove ? `./${this.props.color}-last.png` : `./${this.props.color}.png` } alt={this.props.color}/>}
+      </div>
     )
   }
 }

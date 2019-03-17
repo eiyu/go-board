@@ -34,7 +34,8 @@ export const putStone = (dispatch, state) => (coor, turns, size, switching) => {
 
   return dispatch({
     type: `MOVE${size}`,
-    nextState: nextMove.capturing ? nextState : nextState
+    nextState: nextMove.capturing ? nextState : nextState,
+    lastMove: coor
   })
 }
 

@@ -60,7 +60,6 @@ class CustomBoard extends Component {
   }
 
   render() {
-    console.log(this.props);
     return (
       <Wraper size={this.props.size}>
       <div className="turns">{this.props.play ? '' : this.props.st.turns === 'black' ? 'Giliran: hitam' : 'Giliran: putih'}</div>
@@ -73,17 +72,18 @@ class CustomBoard extends Component {
             <Row style={{paddingBottom:"-11px"}} key={`rw-${x}`}>
               {row.map((col,y) => {
                 return (
-                  <Col key={`st-${x}${y}`} lg={true} md={true} sm={true} xs={true}><CustomStone switching={this.props.switching} play={this.props.play} onMove={this.props.onPutStone} turns={this.props.st.turns} {...col} size={this.props.size}/></Col>
+                  <Col key={`st-${x}${y}`} lg={true} md={true} sm={true} xs={true}><CustomStone switching={this.props.switching} last={this.props.st.last} onMove={this.props.onPutStone} turns={this.props.st.turns} {...col} size={this.props.size}/></Col>
                 )
               })}
             </Row>
             )
           })
         }
+        <br/>
                           {/* refactor this double call with the lib*/}
         <button onClick={() => this.props.st.count > 0 ? this.count('undo') : void 0 }>{"<"}</button>
-        <button onClick={() => this.state.undoCount > 0 ? this.count('redo') : void 0 }>{">"}</button>
         <button onClick={() => this.pass()}>Pass</button>
+        <button onClick={() => this.state.undoCount > 0 ? this.count('redo') : void 0 }>{">"}</button>
       </Grid>
       </ThemeProvider>
       </Wraper>
