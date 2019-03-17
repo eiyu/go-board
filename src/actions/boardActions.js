@@ -8,6 +8,11 @@ export const initialize = (length, play) => {
 }
 
 export const putStone = (dispatch, state) => (coor, turns, size, switching) => {
+  if(coor === 'pass') {
+    return dispatch({
+      type: `PASS${size}`,
+    })
+  }
   // check for illegal moves
   // putting stone in same coordinate
   if(state[coor[0]][coor[1]].value !== '+') {
@@ -32,6 +37,7 @@ export const putStone = (dispatch, state) => (coor, turns, size, switching) => {
     nextState: nextMove.capturing ? nextState : nextState
   })
 }
+
 
 export const undo = (coor, size) => {
   return {

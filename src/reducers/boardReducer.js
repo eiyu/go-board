@@ -30,8 +30,8 @@ export const boardSize = (size=19) => function boardReducer(state=initializeStat
   switch (action.type) {
     case `MOVE${size}`:
       return Object.assign({}, state, {turns: state.turns === 'black' ? 'white' : 'black', count: state.count + 1, points: action.nextState})
-    case `TURN${size}`:
-      return state.turns === 'black' ? Object.assign({}, state, {turns: 'white', count: state.count + 1}) : Object.assign({}, state, {turns: 'black', count: state.count + 1})
+    case `PASS${size}`:
+      return Object.assign({}, state, {...state, turns: state.turns === 'black' ? 'white' : 'black', count: state.count + 1})
     default:
       return state
   }

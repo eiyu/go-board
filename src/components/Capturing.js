@@ -17,7 +17,7 @@ class Capturing extends Component {
 
     componentDidMount() {
       const moves = [
-        [0,3],[2,0],[2,1],[3,1],[1,2],[2,2],[0,4]
+        [2,1],[2,2],[2,3],'pass',[3,2],'pass',
       ]
       const playing = (moves) => {
         moves.forEach((move,x) => {
@@ -37,7 +37,7 @@ class Capturing extends Component {
         </Row>
         <Row>
         <Col>
-         <h3>Aturan</h3>
+         <h3>Penjelasan</h3>
          <ul>
            <li>Batu putih diatas memiliki 4 liberty / nafas</li>
            <li>Batu hitam diletakkan dititik liberty batu lawan</li>

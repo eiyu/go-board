@@ -33,9 +33,10 @@ class CustomBoard extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      UndoCount:0,
-      RedoCount:0,
+      undoCount: 0,
     }
+    this.count = this.count.bind(this)
+    this.pass = this.pass.bind(this)
   }
   componentDidMount() {
     this.props.onInitialize(this.props.play)
@@ -47,21 +48,23 @@ class CustomBoard extends Component {
   count(name) {
     this.props[`on${name}`]()
     this.setState((p,n) => {
-      return name === 'Undo' ? {
-        UndoCount: p.UndoCount + 1,
-        RedoCount: p.RedoCount - 1
-      } : {
-        UndoCount: p.UndoCount - 1,
-        RedoCount: p.RedoCount + 1
-      }
+      return name === 'undo' ? {undoCount: p.undoCount + 1} : {undoCount: p.undoCount - 1}
     })
   }
 
-  render() {
+  pass() {
+    this.setState((p,n) => ({
+      undoCount: p.undoCount - p.undoCount - 1
+    }))
+    this.props.onPutStone('pass',null,this.props.size,null)
+  }
 
+  render() {
+    console.log(this.props);
     return (
       <Wraper size={this.props.size}>
       <div className="turns">{this.props.play ? '' : this.props.st.turns === 'black' ? 'Giliran: hitam' : 'Giliran: putih'}</div>
+
       <ThemeProvider theme={theme}>
       <Grid className="board">
         {
@@ -77,9 +80,10 @@ class CustomBoard extends Component {
             )
           })
         }
-      {/* refactor this double call with the lib make limit to call this based on how many stone */}
-        <button onClick={() => {return this.props.st.count > 0 ? this.count('Undo') : void 0}}>{"<"}</button>
-        <button onClick={() => {return this.state.UndoCount > 0 ? this.count('Redo') : void 0}}>{">"}</button>
+                          {/* refactor this double call with the lib*/}
+        <button onClick={() => this.props.st.count > 0 ? this.count('undo') : void 0 }>{"<"}</button>
+        <button onClick={() => this.state.undoCount > 0 ? this.count('redo') : void 0 }>{">"}</button>
+        <button onClick={() => this.pass()}>Pass</button>
       </Grid>
       </ThemeProvider>
       </Wraper>
@@ -92,13 +96,12 @@ CustomBoard.propType = {
   size: PropType.number,
 }
 
-
 const mapDispatchToProps = (dispatch,props) => {
   return {
     onInitialize: (play) => dispatch(initialize(props.size,play)),
     onPutStone: (coor,turns, size, switching) => putStone(dispatch,props.st.points)(coor,turns, size, switching),
-    onUndo: () => dispatch({type: `UNDO${props.size}`}),
-    onRedo: () => dispatch({type: `REDO${props.size}`}),
+    onundo: () => dispatch({type: `UNDO${props.size}`}),
+    onredo: () => dispatch({type: `REDO${props.size}`}),
   }
 }
 

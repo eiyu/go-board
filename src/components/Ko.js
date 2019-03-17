@@ -49,8 +49,8 @@ class Ko extends Component {
             <li>silahkan dicoba :)</li>
             <li>cukup refresh tab / tekan tombol ulang jika ingin mengulang</li>
           </ul>
-         <NavLink activeStyle={selectedStyle} to="/menangkap-batu"><Col lg={3} md={2} sm={3} xs={2}>Aturan dasar</Col></NavLink>
-         <NavLink activeStyle={selectedStyle} to="/next"><Col lg={3} md={2} sm={3} xs={2}>materi selanjutnya</Col></NavLink>
+         <NavLink activeStyle={selectedStyle} to="/menangkap-batu"><Col lg={3} md={2} sm={3} xs={2}>Menangkap batu lawan</Col></NavLink>
+         <NavLink activeStyle={selectedStyle} to="/next"><Col lg={3} md={2} sm={3} xs={2}>Materi selanjutnya</Col></NavLink>
         </Col>
         </Row>
       </Container>
