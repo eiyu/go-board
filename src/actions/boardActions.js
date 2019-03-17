@@ -27,13 +27,10 @@ export const putStone = (dispatch, state) => (coor, turns, size, switching) => {
     return void 0
   }
 
-  dispatch({
+  return dispatch({
     type: `MOVE${size}`,
     nextState: nextMove.capturing ? nextState : nextState
   })
-  return switching ? dispatch({
-    type: `TURN${size}`
-  }) : dispatch({type:'none'})
 }
 
 export const undo = (coor, size) => {

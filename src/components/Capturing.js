@@ -15,9 +15,17 @@ const selectedStyle = {
 }
 class Capturing extends Component {
 
-  componentDidMount() {
-    return this.props.onPutStone([2,2], 'white', 5)
-  }
+    componentDidMount() {
+      const moves = [
+        [0,3],[2,0],[2,1],[3,1],[1,2],[2,2],[0,4]
+      ]
+      const playing = (moves) => {
+        moves.forEach((move,x) => {
+          this.props.onPutStone( move, (x%2===0 ? 'black':'white') ,5)
+        })
+      }
+      setTimeout(function(){ playing(moves) }, 0);
+    }
   render() {
     return (
         <Container>
@@ -25,7 +33,7 @@ class Capturing extends Component {
         <Col><h1> Menangkap Batu Lawan </h1></Col>
         </Row>
         <Row>
-          <Col><CustomBoard switching={false} play={1} st={this.props.st} size={this.props.size} /></Col>
+          <Col><CustomBoard switching={true} st={this.props.st} size={this.props.size} /></Col>
         </Row>
         <Row>
         <Col>

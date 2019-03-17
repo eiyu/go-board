@@ -30,6 +30,13 @@ const theme = {
 // actually we just need one props which is size
 // for the game and board reducer we need another parameter (unique index)
 class CustomBoard extends Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      UndoCount:0,
+      RedoCount:0,
+    }
+  }
   componentDidMount() {
     this.props.onInitialize(this.props.play)
   }
@@ -37,9 +44,21 @@ class CustomBoard extends Component {
   componentWillUnmount() {
     //
   }
+  count(name) {
+    this.props[`on${name}`]()
+    this.setState((p,n) => {
+      return name === 'Undo' ? {
+        UndoCount: p.UndoCount + 1,
+        RedoCount: p.RedoCount - 1
+      } : {
+        UndoCount: p.UndoCount - 1,
+        RedoCount: p.RedoCount + 1
+      }
+    })
+  }
 
   render() {
-    console.log(this.props);
+
     return (
       <Wraper size={this.props.size}>
       <div className="turns">{this.props.play ? '' : this.props.st.turns === 'black' ? 'Giliran: hitam' : 'Giliran: putih'}</div>
@@ -58,9 +77,9 @@ class CustomBoard extends Component {
             )
           })
         }
-                          {/* refactor this double call with the lib*/}
-        <button onClick={() => {this.props.onUndo(); this.props.onUndo()}}>{"<"}</button>
-        <button onClick={() => {this.props.onRedo();this.props.onRedo();}}>{">"}</button>
+      {/* refactor this double call with the lib make limit to call this based on how many stone */}
+        <button onClick={() => {return this.props.st.count > 0 ? this.count('Undo') : void 0}}>{"<"}</button>
+        <button onClick={() => {return this.state.UndoCount > 0 ? this.count('Redo') : void 0}}>{">"}</button>
       </Grid>
       </ThemeProvider>
       </Wraper>
