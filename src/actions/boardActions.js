@@ -1,4 +1,6 @@
 import {onUpdate} from '../lib/move'
+import {onRemove} from '../lib/remove'
+import {curry} from 'ramda'
 export const initialize = (length, play) => {
   return {
     type: 'INIT',
@@ -7,7 +9,7 @@ export const initialize = (length, play) => {
   }
 }
 
-export const putStone = (dispatch, state) => (coor, turns, size, switching) => {
+export const putStone = curry((dispatch, state, turns, coor, size) => {
   if(coor === 'pass') {
     return dispatch({
       type: `PASS${size}`,
@@ -21,7 +23,6 @@ export const putStone = (dispatch, state) => (coor, turns, size, switching) => {
   }
   const nextState = onUpdate(coor, turns, state)
   const nextMove = nextState[coor[0]][coor[1]]
-
   if(nextState[coor[0]][coor[1]].liberty === 0 && nextMove.suicide && !nextMove.capturing) {
     alert("Langkah Terlarang! \n Bunuh diri")
     return void 0
@@ -34,11 +35,26 @@ export const putStone = (dispatch, state) => (coor, turns, size, switching) => {
 
   return dispatch({
     type: `MOVE${size}`,
-    nextState: nextMove.capturing ? nextState : nextState,
-    lastMove: coor
+    nextState: nextState,
+    lastMove: coor,
+    captured: nextMove.captures.length,
+    turns
   })
 }
+)
 
+export const removeStone = curry((dispatch, state, coor, size) => {
+  // console.log('fak', coor, state);
+  if(state[coor[0]][coor[1]].value === '+') {
+    console.log('wut');
+    return void 0
+  }
+  const nextState = onRemove(coor,state)
+  return dispatch({
+    type: `REMOVE${size}`,
+    nextState: nextState
+  })
+})
 
 export const undo = (coor, size) => {
   return {

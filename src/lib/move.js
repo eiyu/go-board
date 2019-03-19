@@ -14,14 +14,14 @@ import {neighbor,surround, initialLiberty, opps, subs, edge, emptySpace} from '.
 
 export const onUpdate = (coor, turns, state) => {
 
-    const [col,row] = coor
+    const [row,col] = coor
     // neighbors
     const neighbors = neighbor(surround, coor, state)
     const subordinates = subs(turns, neighbors)
     const opponents = opps(turns, neighbors)
     const edges = edge(neighbors)
     const emptySpaces = emptySpace(neighbors)
-    const lensTo = lensCreate(lensIndex(col),lensIndex(row))
+    const lensTo = lensCreate(lensIndex(row),lensIndex(col))
     const lensToChain = lensTo(chain)
 
     return pipe(
@@ -33,6 +33,7 @@ export const onUpdate = (coor, turns, state) => {
       updateChainMembers(coor, turns, subordinates, state),
       over(lensToChain, uniq),
       updateEnemiesChain(coor, turns, opponents),
-      preventSuicide(coor, subordinates)
+      preventSuicide(coor, subordinates),
+      // test(coor,turns)
     )(state)
 }

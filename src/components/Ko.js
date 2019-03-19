@@ -19,7 +19,7 @@ class Ko extends Component {
     ]
     const playing = (moves) => {
       moves.forEach((move,x) => {
-        this.props.onPutStone( move, (x%2===0 ? 'black':'white') ,6)
+        this.props.onPutStone( move, 6)
       })
     }
     setTimeout(function(){ playing(moves) }, 0);
@@ -66,7 +66,7 @@ Ko.propType = {
 
 const dispatchToProps = (dispatch, props) => {
   return {
-    onPutStone: (coor,turns, size, switching) => putStone(dispatch,props.st.points)(coor,turns, size, switching),
+    onPutStone: (coor, size) => putStone(dispatch,props.st.points, props.st.turns)(coor, size),
     // onRemove: id => dispatch(removeStone(id)),
   }
 }

@@ -1,32 +1,24 @@
-import React, {Component} from 'react';
+import React, {PureComponent} from 'react';
 import PropType from 'prop-types'
-import {connect} from 'react-redux'
-import {capturing} from '../actions/tutorialActions'
-class CustomStone extends Component {
-  shouldComponentUpdate(nextProps, nextState) {
-    return nextProps !== this.props
-  }
+
+// try to figure out how to effectively optimize this later
+// the component depends on props.last which cause every coordinate rerender
+// because every click will change props.last
+// at this time the performance is still good tho
+export default class CustomStone extends PureComponent {
   render() {
     const lastMove = this.props.coor[0] === this.props.last[0] && this.props.coor[1] === this.props.last[1]
     return (
       <div
       className="coordinate"
       key={this.props.coor}
-      onClick={() => this.props.onMove(this.props.coor, this.props.turns, this.props.size, this.props.switching)}
+      onClick={() => this.props.game === 0 ? this.props.onRemove(this.props.coor, this.props.size) : this.props.onMove(this.props.coor, this.props.size)}
       >
-      {this.props.value === '+' ? '+' : <img src={ lastMove ? `./${this.props.color}-last.png` : `./${this.props.color}.png` } alt={this.props.color}/>}
+      {this.props.value === '+' ? '+' : <img src={lastMove ? `./${this.props.color}-last.png` : `./${this.props.color}.png` } alt={this.props.color}/>}
       </div>
     )
   }
 }
-
-const mapDispatchToProps = dispatch => ({
-  onCapturing: () => dispatch(capturing())
-})
-
-export default connect(null, mapDispatchToProps)(CustomStone)
-
-//
 
 CustomStone.propType = {
   onMove: PropType.func,
@@ -35,5 +27,6 @@ CustomStone.propType = {
   points: PropType.object,
   turns: PropType.string,
   id: PropType.string,
-  evaluated: PropType.bool
+  evaluated: PropType.bool,
+  game: PropType.number
 }
