@@ -1,7 +1,8 @@
 import React, {Component} from 'react'
 import PropType from 'prop-types'
-import {Grid, Col, Row} from 'react-styled-flexboxgrid'
-import {Wraper} from './styled/Wraper'
+import {Grid,Col, Row} from 'react-styled-flexboxgrid'
+import {Wraper, Line} from './styled/Wraper'
+// import Col from './styled/Col'
 import CustomStone from './CustomStone'
 import {initialize, putStone, removeStone} from '../actions/boardActions'
 import {connect} from 'react-redux'
@@ -98,34 +99,30 @@ class CustomBoard extends Component {
   }
 
   render() {
+    // draw hoshi with css
     return (
+      <div>
       <Wraper size={this.props.size}>
-      {this.state.game === 1 ? <div className="turns">{this.props.play ? '' : this.props.st.turns === 'black' ? 'Giliran: hitam' : 'Giliran: putih'}</div> : <div>angkat semua batu yang mati</div>}
-
-      <ThemeProvider theme={theme}>
-      <Grid className="board">
         {
           this.props.st.points.map((row,x,act) => {
           return (
-            <Row style={{paddingBottom:"-11px"}} key={`rw-${x}`}>
-              {row.map((col,y) => {
+              row.map((col,y) => {
                 return (
-                  <Col key={`st-${x}${y}`} lg={true} md={true} sm={true} xs={true}><CustomStone game={this.state.game} last={this.props.st.last} onRemove={this.onRemove} onMove={this.onMove} {...col} size={this.props.size}/></Col>
+                  <Line coor={[x,y]} size={this.props.size} className="col" key={`st-${x}${y}`}><CustomStone game={this.state.game} last={this.props.st.last} onRemove={this.onRemove} onMove={this.onMove} {...col} size={this.props.size}/></Line>
                 )
-              })}
-            </Row>
+              })
             )
           })
         }
-        <br/>
-
-        <button onClick={() => this.state.game === 0 ? (this.state.removeCount === 0) ? void 0 : this.endingAct('undo') : (this.props.st.count > 0) ? this.gameAct('undo') : void 0 }>{"<"}</button>
-        {this.state.game === 1 ? <button onClick={() => this.state.game === 0 ? void 0 : this.pass()}>Pass</button> : null}
-        {this.state.game === 1 ? <button onClick={() => this.state.game === 0 ? void 0 : this.state.undoCount > 0 ? this.gameAct('redo') : void 0 }>{">"}</button>: null}
-        {this.state.game === 0 ? <button onClick={() => this.state.game === 0 ? void 0 : 'this.pass()'}>selesai</button> : null}
-      </Grid>
-      </ThemeProvider>
       </Wraper>
+      <br/>
+
+      <button onClick={() => this.state.game === 0 ? (this.state.removeCount === 0) ? void 0 : this.endingAct('undo') : (this.props.st.count > 0) ? this.gameAct('undo') : void 0 }>undo</button>
+      {this.state.game === 1 ? <button onClick={() => this.state.game === 0 ? void 0 : this.pass()}>Pass</button> : null}
+      {this.state.game === 1 ? <button onClick={() => this.state.game === 0 ? void 0 : this.state.undoCount > 0 ? this.gameAct('redo') : void 0 }>redo</button>: null}
+      {this.state.game === 0 ? <button onClick={() => this.state.game === 0 ? void 0 : 'this.pass()'}>selesai</button> : null}
+
+      </div>
     )
   }
 }
@@ -146,5 +143,6 @@ const mapDispatchToProps = (dispatch,props) => {
     onredo: () => dispatch({type: `REDO${props.size}`}),
   }
 }
+// {this.state.game === 1 ? <div className="turns">{this.props.play ? '' : this.props.st.turns === 'black' ? 'Giliran: hitam' : 'Giliran: putih'}</div> : <div>angkat semua batu yang mati</div>}
 
 export default connect(null, mapDispatchToProps)(CustomBoard)

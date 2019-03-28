@@ -1,110 +1,42 @@
 import styled from 'styled-components'
 import {media} from './media'
-
+import inner from '../boards/inner.svg'
+import cornerNe from '../boards/cornerNe.svg'
+import cornerNw from '../boards/cornerNw.svg'
+import cornerSe from '../boards/cornerSe.svg'
+import cornerSw from '../boards/cornerSw.svg'
+import sideN from '../boards/sideN.svg'
+import sideE from '../boards/sideE.svg'
+import sideS from '../boards/sideS.svg'
+import sideW from '../boards/sideW.svg'
 // fit for board 13x13
 export const Wraper = styled.div`
-  padding: -1px;
-  color: black;
-  background-color: #dcca98;
-  width: ${({size}) => {return size * 19.2}}px;
-  text-align: center;
-  span {
-    color: 'black';
-    width: 15px;
-    padding-left: 2px;
-    margin: 0px;
-    padding:0px;
-  }
-  .turns {
-    background-color: white;
-    margin-left: 0px;
-  }
-  div {
-    cursor: pointer;
-    text-indent: 0px;
-    margin-left: 0.13rem;
-    width: ${({size}) => {return size * 19.3}}px;
-  }
+
+  display: flex;                       /* establish flex container */
+  flex-wrap: wrap;                     /* enable flex items to wrap */
+  justify-content: space-around;
+    width: ${({size}) => {return size * 18.42}}px;
+    margin:0;
   .coordinate {
-    margin-left: -3px;
-    padding-bottom: 1px;
-    width: 10px;
-    text-align: center;
+    color:#fff0;
+    width:10px;
+    margin-top: -1px;
+    margin-left: 4px;
+    position: absolute;
     img {
-      margin-left: -0.15em;
+      z-index: -1;
+      margin-left: -3px;
       margin-top: 2px;
-      width: 15px;
+      width: 18px;
       padding: 0px;
-    }
-  }
-  .board {
-    div {
-      div {height: 18px}
-      margin-top: 0px;
     }
   }
   ${media.tablet`
-    font-size: ${({size}) => size === 19 ? 15 : 17 }px;
-    width: ${({size}) => {return size === 19 ? size * 16 : size * 20}}px;
-    div {
-      margin-left: 0.09rem;
-      width: ${({size}) => {return size === 19 ? size * 16 : size * 20}}px;
-      margin-bottom: ${({size}) => {return size === 19 ? size * 0.10 : size >= 13 ? size * 0.21 : size * 0.40 }}px;
-    }
 
-  .coordinate {
-
-    margin-left: -1px;
-    padding-bottom: 1px;
-    width: 10px;
-    text-align: center;
-    img {
-      margin-left: -2px;
-      margin-top: ${({size}) => {return size === 19 ? 2 : size >= 13 ? 3 : 4}}px;
-      width: ${({size}) => size === 19 ? 14 : 16 }px;
-      padding: 0px;
-    }
-  }
-  .board {
-    div {
-      // div {height: 17px}
-      margin-top: 0px;
-      margin-bottom: ${({size}) => size === 19 ? -0.05 : -0.005 }em;
-    }
-  }
   `}
   ${media.phone`
-
-    font-size: ${({size}) => size === 19 ? 15 : 17 }px;
-    width: ${({size}) => {return size === 19 ? size * 16 : size * 20}}px;
-    div {
-      margin-left: 0.09rem;
-      width: ${({size}) => {return size === 19 ? size * 16 : size * 20}}px;
-      margin-bottom: ${({size}) => {return size === 19 ? size * 0.10 : size >= 13 ? size * 0.21 : size * 0.40 }}px;
-    }
-
-  .coordinate {
-    margin-left: -1px;
-    padding-bottom: 1px;
-    width: 10px;
-    text-align: center;
-    img {
-      margin-left: -2px;
-      margin-top: ${({size}) => {return size === 19 ? 2 : size >= 13 ? 3 : 4}}px;
-      width: ${({size}) => size === 19 ? 14 : 16 }px;
-      padding: 0px;
-    }
-  }
-  .board {
-    div {
-      // div {height: 17px}
-      margin-top: 0px;
-      margin-bottom: ${({size}) => size === 19 ? -0.05 : -0.005 }em;
-    }
-  }
   `}
 `
-
 export const Container = styled.div`
   button {
     background-color: blue;
@@ -141,4 +73,56 @@ export const Container = styled.div`
       float: right;
     }
   `}
+`
+
+export const Line = styled.div`
+  background-image: url(${({coor, size}) => {
+    const [x,y] = coor
+    const nw = x===0&&y===0
+    const ne = x===0&&y===size - 1
+    const sw = x===size-1 && y === 0
+    const se = x===size-1 && y === size-1
+    const top = x===0 && !nw && !ne
+    const left = x!==0 && y===0
+    const right = y===size-1 && x!== 0
+    const bot = x=== size -1 && !se && !sw
+    if(nw){
+      return cornerNw
+    }
+    if(sw) {
+      return cornerSw
+    }
+    if(se) {
+      return cornerSe
+    }
+    if(ne){
+      return cornerNe
+    }
+    if(top) {
+      return sideN
+    }
+    if(bot) {
+      return sideS
+    }
+    if(left) {
+      return sideW
+    }
+    if(right) {
+      return sideE
+    }
+    else {
+      return inner
+    }
+  }});
+  flex-direction: row;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: left;
+  background-color: #d2be5bf2;
+  border: 0px;
+  flex-grow: 0%;
+  height: 19px;
+  width: 19px;
+  margin: auto;
+  margin-left: -1px;
 `

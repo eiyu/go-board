@@ -14,7 +14,7 @@ export default class CustomStone extends PureComponent {
       key={this.props.coor}
       onClick={() => this.props.game === 0 ? this.props.onRemove(this.props.coor, this.props.size) : this.props.onMove(this.props.coor, this.props.size)}
       >
-      {this.props.value === '+' ? '+' : <img src={lastMove ? `./${this.props.color}-last.png` : `./${this.props.color}.png` } alt={this.props.color}/>}
+{this.props.value === '+' ? '+' : <img src={lastMove ? `./${this.props.color}-last.png` : `./${this.props.color}.png` } alt={this.props.color}/>}
       </div>
     )
   }
@@ -30,3 +30,5 @@ CustomStone.propType = {
   evaluated: PropType.bool,
   game: PropType.number
 }
+
+// {this.props.value === '+' ? '+' : <img src={lastMove ? `./${this.props.color}-last.png` : `./${this.props.color}.png` } alt={this.props.color}/>}
