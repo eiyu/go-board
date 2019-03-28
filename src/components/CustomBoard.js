@@ -6,29 +6,6 @@ import {Wraper, Line} from './styled/Wraper'
 import CustomStone from './CustomStone'
 import {initialize, putStone, removeStone} from '../actions/boardActions'
 import {connect} from 'react-redux'
-import {ThemeProvider} from 'styled-components'
-const theme = {
-  flexboxgrid: {
-    // Defaults
-    gridSize: 2, // columns
-    gutterWidth: 0, // rem
-    outerMargin: 0, // rem
-    mediaQuery: 'only screen',
-    container: {
-      sm: 46, // rem
-      md: 47, // rem
-      lg: 70  // rem
-    },
-    breakpoints: {
-      xs: 0,  // em
-      sm: 48, // em
-      md: 50, // em
-      lg: 75  // em
-    },
-  }
-}
-
-
 class CustomBoard extends Component {
   constructor(props) {
     super(props)
