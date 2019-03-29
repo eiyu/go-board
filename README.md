@@ -36,16 +36,17 @@ And then create the component
 // - id type string (board id)
 
 import React, {Component} from 'react';
+import {connect} from 'react-redux';
 // import CustomBoard from your directory
 import CustomBoard from './CustomBoard'
 
 class MyPage extends Component {
   render() {
     return (
-      <div>
-        <CustomBoard st={this.props.board19} size={19} boardId='id-3'/>
+      <div style={{float: 'left', display:"flex"}}>
+        <CustomBoard st={this.props.board19} size={19} boardId='id-5'/>
         <CustomBoard st={this.props.board13} size={13} boardId='id-4'/>
-        <CustomBoard st={this.props.board9} size={9} boardId='id-5'/>
+        <CustomBoard st={this.props.board9} size={9} boardId='id-3'/>
         <CustomBoard st={this.props.board9_6} size={9} boardId='id-6'/>
         <CustomBoard st={this.props.board9_7} size={9} boardId='id-7'/>
       </div>

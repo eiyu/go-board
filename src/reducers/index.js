@@ -13,4 +13,6 @@ export const allReducer = combineReducers({
   board9: createBoard(9,'id-3'),
   board13: createBoard(13,'id-4'),
   board19: createBoard(19,'id-5'),
+  board9_6: createBoard(9,'id-6'),
+  board9_7: createBoard(9,'id-7'),
 })
