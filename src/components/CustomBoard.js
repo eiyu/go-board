@@ -4,7 +4,7 @@ import {Grid,Col, Row} from 'react-styled-flexboxgrid'
 import {Wraper, Line, LineWrap} from './styled/Wraper'
 // import Col from './styled/Col'
 import CustomStone from './CustomStone'
-import {initialize, putStone, removeStone, countScore} from '../actions/boardActions'
+import {initialize, putStone, removeStone} from '../actions/boardActions'
 import {connect} from 'react-redux'
 class CustomBoard extends Component {
   constructor(props) {
@@ -126,7 +126,6 @@ const mapDispatchToProps = (dispatch,props) => {
     onRemove: (coor) => removeStone(dispatch,props.st.points, props.size, props.boardId)(coor),
     onundo: () => dispatch({type: `UNDO${props.boardId}`}),
     onredo: () => dispatch({type: `REDO${props.boardId}`}),
-    onCountScore: (coor,size) => {return countScore(dispatch, props.st.points, 'white')(coor,size)},
   }
 }
 // {this.state.game === 1 ? <div className="turns">{this.props.play ? '' : this.props.st.turns === 'black' ? 'Giliran: hitam' : 'Giliran: putih'}</div> : <div>angkat semua batu yang mati</div>}

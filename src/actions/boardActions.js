@@ -1,6 +1,6 @@
 import {onUpdate} from '../lib/move'
 import {onRemove} from '../lib/remove'
-import {scoring} from '../lib/scoring'
+// import {scoring} from '../lib/scoring'
 import {curry, flatten} from 'ramda'
 export const initialize = (length, play) => {
   return {
@@ -54,28 +54,6 @@ export const removeStone = curry((dispatch, state, size, id, coor) => {
     nextState: result.nextState,
     captured: result.deadChain,
     color: state[coor[0]][coor[1]].color === 'white' ? 'black' : 'white'
-  })
-})
-
-export const countScore = curry((dispatch, state, turns, size, id, coor) => {
-  // console.log('meep');
-  const nextState = scoring(state)
-  // count score
-  const white = nextState.map(r => {
-    return r.filter(n => n.whitePoint === 4)
-  })
-  const black = nextState.map(r => {
-    return r.filter(n => n.blackPoint === 4)
-  })
-
-  const blackScore = flatten(black).length
-  const whiteScore = flatten(white).length
-
-  return dispatch({
-    type: `END${size+id}`,
-    nextState: nextState,
-    blackScore,
-    whiteScore
   })
 })
 
