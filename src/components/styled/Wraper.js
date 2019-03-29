@@ -18,7 +18,7 @@ export const Wraper = styled.div`
     width: ${({size}) => {return size * 18.42}}px;
     margin:0;
   .coordinate {
-    color:#fff0;
+    color:rgba(254, 255, 255, 0);
     width:10px;
     margin-top: -1px;
     margin-left: 4px;
@@ -128,13 +128,13 @@ export const Container = styled.div`
 `
 
 export const LineWrap = styled.div`
-  background-color: #d2be5bf2;
+  background-color: rgba(210, 190, 91, 0.9490196078431372);
   height: ${({size}) => {return size * 19.10}}px;
   width: ${({size}) => {return size * 18.42}}px;
 `
 
 export const Line = styled.div`
-  background-color: #d2be5bf2;
+  background-color: rgba(210, 190, 91, 0.9490196078431372);
   background-image: url(${({coor, size}) => {
     const [x,y] = coor
     const nw = x===0&&y===0

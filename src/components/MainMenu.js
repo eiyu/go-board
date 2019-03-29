@@ -43,7 +43,7 @@ class PageTemplate extends React.PureComponent {
                   <h2>Go Interaktif</h2>
                   </Col>
                   <NavLink activeStyle={selectedStyle} to="/"><Col lg={1} md={1} sm={3} xs={2}>Home</Col></NavLink>
-                  <NavLink activeStyle={selectedStyle} to="/aturan-dasar"><Col lg={1} md={2} sm={3} xs={2}>Tutorial</Col></NavLink>
+                  <NavLink style={{color:"white", marginLeft: "15px", textDecoration:"none"}} activeStyle={selectedStyle} to="/aturan-dasar"><Col lg={1} md={2} sm={3} xs={2}>Tutorial</Col></NavLink>
                 </Row>
                 <Row>
                 <Col lg={6} md={6} sm={8} xs={11}>

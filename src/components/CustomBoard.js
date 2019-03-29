@@ -61,7 +61,6 @@ class CustomBoard extends Component {
       this.props.onPutStone('pass',this.props.size)
     }
     onMove(coor) {
-      console.log(coor);
       this.setState((p,n) => ({
         passCount: p.passCount - p.passCount
       }))
@@ -121,8 +120,6 @@ CustomBoard.propType = {
 //
 // }
 const mapDispatchToProps = (dispatch,props) => {
-
-  console.log(props);
   return {
     onInitialize: (play) => dispatch(initialize(props.size,play)),
     onPutStone: (coor) => putStone(dispatch,props.st.points, props.st.turns, props.size, props.boardId)(coor),

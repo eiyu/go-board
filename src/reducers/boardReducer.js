@@ -45,7 +45,6 @@ const initializeState = prepare(initialStoneState)
 export const boardSize = (size=19,id) => function boardReducer(state=initializeState(size), action) {
   switch (action.type) {
     case `MOVE${size+id}`:
-    console.log(size, id);
       return Object.assign({},
         state,
         {

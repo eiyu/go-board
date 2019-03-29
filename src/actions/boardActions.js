@@ -11,7 +11,6 @@ export const initialize = (length, play) => {
 }
 
 export const putStone = curry((dispatch, state, turns, size,id, coor) => {
-  console.log(size,id);
   if(coor === 'pass') {
     return dispatch({
       type: `PASS${size+id}`,
@@ -47,7 +46,6 @@ export const putStone = curry((dispatch, state, turns, size,id, coor) => {
 
 export const removeStone = curry((dispatch, state, size, id, coor) => {
   if(state[coor[0]][coor[1]].value === '+') {
-    console.log('wut');
     return void 0
   }
   const result = onRemove(coor,state)
