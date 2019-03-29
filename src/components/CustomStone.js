@@ -12,7 +12,7 @@ export default class CustomStone extends PureComponent {
       <div
       className="coordinate"
       key={this.props.coor}
-      onClick={() => this.props.game === 0 ? this.props.onRemove(this.props.coor, this.props.size) : this.props.onMove(this.props.coor, this.props.size)}
+      onClick={() => this.props.game === 0 ? this.props.onRemove(this.props.coor) : this.props.onMove(this.props.coor)}
       >
 {this.props.value === '+' ? '+' : <img src={lastMove ? `./${this.props.color}-last.png` : `./${this.props.color}.png` } alt={this.props.color}/>}
       </div>

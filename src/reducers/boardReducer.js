@@ -1,5 +1,7 @@
 import {range, add} from 'ramda'
 const initialStoneState = {
+  blackPoint: 0,
+  whitePoint: 0,
   captureOnce: false,
   color: 'brown',
   liberty: 4,
@@ -14,17 +16,23 @@ const initialStoneState = {
   captures:[],
   enemiesChain: [],
   suicide: false,
+  visited: false,
 }
 // fix state!!!
 const prepare = stone => (length) => {
     const size = range(0,length)
     return {
+      status: "",
       last : [],
       turns: 'black',
       count:0,
-      captured: {
+      capture: {
+        black: 0,
+        white: 0,
+      },
+      teritory: {
         black:0,
-        white:0,
+        white:6.5,
       } ,
       points: size.map(x => {
       return size.map(y => {
@@ -34,21 +42,43 @@ const prepare = stone => (length) => {
 }
 const initializeState = prepare(initialStoneState)
 
-export const boardSize = (size=19) => function boardReducer(state=initializeState(size), action) {
+export const boardSize = (size=19,id) => function boardReducer(state=initializeState(size), action) {
   switch (action.type) {
-    case `MOVE${size}`:
+    case `MOVE${size+id}`:
+    console.log(size, id);
       return Object.assign({},
         state,
         {
-          captured: Object.assign({}, state.captured, {
-            [action.turns]: add(state.captured[action.turns],action.captured)
+          capture: Object.assign({}, state.capture, {
+            [action.turns]: add(state.capture[action.turns],action.captured)
           }),
           last: action.lastMove,
           turns: state.turns === 'black' ? 'white' : 'black',
           count: state.count + 1, points: action.nextState
         })
-    case `REMOVE${size}` : return Object.assign({},state,{points: action.nextState})
-    case `PASS${size}`:
+    case `REMOVE${size+id}` :
+      return Object.assign({},
+      state,
+      {
+        points: action.nextState,
+        capture: Object.assign({}, state.capture, {
+          [action.color]: add(state.capture[action.color],action.captured)
+        }),
+      })
+
+    case `END${size+id}` :
+      return Object.assign({},
+      state,
+      {
+        points: action.nextState,
+        status: "end",
+        teritory: Object.assign({}, state.score, {
+          white: add(state.teritory['white'],action.whiteScore),
+          black: add(state.teritory['black'],action.blackScore)
+        }),
+      })
+
+    case `PASS${size+id}`:
       return Object.assign({}, state, {...state, last: 'pass', turns: state.turns === 'black' ? 'white' : 'black', count: state.count + 1})
     default:
       return state

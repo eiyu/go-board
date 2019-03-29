@@ -9,11 +9,11 @@ import sideN from '../boards/sideN.svg'
 import sideE from '../boards/sideE.svg'
 import sideS from '../boards/sideS.svg'
 import sideW from '../boards/sideW.svg'
-// fit for board 13x13
+
 export const Wraper = styled.div`
 
-  display: flex;                       /* establish flex container */
-  flex-wrap: wrap;                     /* enable flex items to wrap */
+  display: flex;
+  flex-wrap: wrap;
   justify-content: space-around;
     width: ${({size}) => {return size * 18.42}}px;
     margin:0;
@@ -32,9 +32,45 @@ export const Wraper = styled.div`
     }
   }
   ${media.tablet`
-
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+      width: ${({size}) => {return size * 18.42}}px;
+      margin:0;
+    .coordinate {
+      color:#fff0;
+      width:10px;
+      margin-top: -1px;
+      margin-left: 4px;
+      position: absolute;
+      img {
+        z-index: -1;
+        margin-left: -3px;
+        margin-top: 2px;
+        width: 18px;
+        padding: 0px;
+      }
+    }
   `}
   ${media.phone`
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+      width: ${({size}) => {return size * 18.42}}px;
+    .coordinate {
+      color:#fff0;
+      width:10px;
+      margin-top: -1px;
+      margin-left: 4px;
+      position: absolute;
+      img {
+        z-index: -1;
+        margin-left: -3px;
+        margin-top: 2px;
+        width: 18px;
+        padding: 0px;
+      }
+    }
   `}
 `
 export const Container = styled.div`
@@ -54,13 +90,29 @@ export const Container = styled.div`
     width: 330px;
   }
   width:300px;
+  button {
+    background-color: blue;
+    color: white;
+    float: right;
+  }
   ${media.tablet`
     font-size: 0.9em;
     margin-left: 30px;
+    margin-top: 10px;
+    width: 360px;
+    ul {
+      li{margin-left: -10px;}
+      width: 250px;
+    }
+    button {
+      background-color: blue;
+      color: white;
+      float: right;
+    }
   `}
   ${media.phone`
     font-size: 0.9em;
-    margin-left: 10px;
+    margin-left: -3px;
     margin-top: 10px;
     width: 360px;
     ul {
@@ -75,7 +127,14 @@ export const Container = styled.div`
   `}
 `
 
+export const LineWrap = styled.div`
+  background-color: #d2be5bf2;
+  height: ${({size}) => {return size * 19.10}}px;
+  width: ${({size}) => {return size * 18.42}}px;
+`
+
 export const Line = styled.div`
+  background-color: #d2be5bf2;
   background-image: url(${({coor, size}) => {
     const [x,y] = coor
     const nw = x===0&&y===0
@@ -118,7 +177,6 @@ export const Line = styled.div`
   background-size: contain;
   background-repeat: no-repeat;
   background-position: left;
-  background-color: #d2be5bf2;
   border: 0px;
   flex-grow: 0%;
   height: 19px;

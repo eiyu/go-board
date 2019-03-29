@@ -1,6 +1,7 @@
 import {onUpdate} from '../lib/move'
 import {onRemove} from '../lib/remove'
-import {curry} from 'ramda'
+import {scoring} from '../lib/scoring'
+import {curry, flatten} from 'ramda'
 export const initialize = (length, play) => {
   return {
     type: 'INIT',
@@ -9,10 +10,11 @@ export const initialize = (length, play) => {
   }
 }
 
-export const putStone = curry((dispatch, state, turns, coor, size) => {
+export const putStone = curry((dispatch, state, turns, size,id, coor) => {
+  console.log(size,id);
   if(coor === 'pass') {
     return dispatch({
-      type: `PASS${size}`,
+      type: `PASS${size+id}`,
     })
   }
   // check for illegal moves
@@ -34,7 +36,7 @@ export const putStone = curry((dispatch, state, turns, coor, size) => {
   }
 
   return dispatch({
-    type: `MOVE${size}`,
+    type: `MOVE${size+id}`,
     nextState: nextState,
     lastMove: coor,
     captured: nextMove.captures.length,
@@ -43,22 +45,45 @@ export const putStone = curry((dispatch, state, turns, coor, size) => {
 }
 )
 
-export const removeStone = curry((dispatch, state, coor, size) => {
-  // console.log('fak', coor, state);
+export const removeStone = curry((dispatch, state, size, id, coor) => {
   if(state[coor[0]][coor[1]].value === '+') {
     console.log('wut');
     return void 0
   }
-  const nextState = onRemove(coor,state)
+  const result = onRemove(coor,state)
   return dispatch({
-    type: `REMOVE${size}`,
-    nextState: nextState
+    type: `REMOVE${size+id}`,
+    nextState: result.nextState,
+    captured: result.deadChain,
+    color: state[coor[0]][coor[1]].color === 'white' ? 'black' : 'white'
   })
 })
 
-export const undo = (coor, size) => {
+export const countScore = curry((dispatch, state, turns, size, id, coor) => {
+  // console.log('meep');
+  const nextState = scoring(state)
+  // count score
+  const white = nextState.map(r => {
+    return r.filter(n => n.whitePoint === 4)
+  })
+  const black = nextState.map(r => {
+    return r.filter(n => n.blackPoint === 4)
+  })
+
+  const blackScore = flatten(black).length
+  const whiteScore = flatten(white).length
+
+  return dispatch({
+    type: `END${size+id}`,
+    nextState: nextState,
+    blackScore,
+    whiteScore
+  })
+})
+
+export const undo = (coor, size, id) => {
   return {
-    type: `UNDO${size}`,
+    type: `UNDO${size+id}`,
     coor
   }
 }

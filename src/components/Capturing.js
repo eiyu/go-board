@@ -21,7 +21,7 @@ class Capturing extends Component {
       ]
       const playing = (moves) => {
         moves.forEach((move,x) => {
-          this.props.onPutStone( move, 5)
+          this.props.onPutStone(move)
         })
       }
       setTimeout(function(){ playing(moves) }, 0);
@@ -33,7 +33,7 @@ class Capturing extends Component {
         <Col><h1> Menangkap Batu Lawan </h1></Col>
         </Row>
         <Row>
-          <Col><CustomBoard switching={true} st={this.props.st} size={this.props.size} /></Col>
+          <Col><CustomBoard boardId={this.props.boardId} st={this.props.st} size={this.props.size} /></Col>
         </Row>
         <Row>
         <Col>
@@ -68,7 +68,7 @@ Capturing.propType = {
 
 const dispatchToProps = (dispatch, props) => {
   return {
-    onPutStone: (coor, size) => putStone(dispatch,props.st.points, props.st.turns)(coor, size),
+    onPutStone: (coor) => putStone(dispatch,props.st.points, props.st.turns, props.size, props.boardId)(coor),
     // onRemove: id => dispatch(removeStone(id)),
   }
 }

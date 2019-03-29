@@ -24,7 +24,7 @@ export default class LandingPage extends Component {
         <Col lg={12}><h1> Papan Igo </h1></Col>
         </Row>
         <Row>
-          <Col lg={1}><CustomBoard switching={true} st={this.props.st} size={this.props.size} /></Col>
+          <Col lg={1}><CustomBoard boardId={this.props.boardId} st={this.props.st} size={this.props.size} /></Col>
         </Row>
         <Row>
         <Col lg={12}>

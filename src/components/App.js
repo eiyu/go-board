@@ -12,10 +12,10 @@ class App extends Component {
     return (
       <PageTemplate>
         <Switch>
-          <Route exact path="/" render={(props) => <Home size={19} st={this.props.board19} {...props} />}/>
-          <Route exact path="/aturan-dasar" render={(props) => <LandingPage size={13} st={this.props.board13} {...props} />}/>
-          <Route exact path="/menangkap-batu" render={(props) => <Capturing size={5} st={this.props.board5} {...props} />}/>
-          <Route exact path="/peraturan-ko" render={(props) => <Ko size={6} st={this.props.board6} {...props} />}/>
+          <Route exact path="/" render={(props) => <Home size={19} boardId="id-5" st={this.props.board19} {...props} />}/>
+          <Route exact path="/aturan-dasar" render={(props) => <LandingPage size={13} boardId="id-4" st={this.props.board13} {...props} />}/>
+          <Route exact path="/menangkap-batu" render={(props) => <Capturing size={5} boardId="id-1" st={this.props.board5} {...props} />}/>
+          <Route exact path="/peraturan-ko" render={(props) => <Ko size={6} boardId="id-2" st={this.props.board6} {...props} />}/>
           <Route component={Whoops}/>
         </Switch>
       </PageTemplate>
@@ -25,7 +25,7 @@ class App extends Component {
 
 const stateToProps = (state, props) => {
   return {
-    board19: state.undo19.present,
+    board19: state.board19.present,
     board6: state.board6.present,
     board13: state.board13.present,
     board5: state.board5.present,
