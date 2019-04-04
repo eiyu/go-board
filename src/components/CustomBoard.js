@@ -62,7 +62,8 @@ class CustomBoard extends Component {
     }
     onMove(coor) {
       this.setState((p,n) => ({
-        passCount: p.passCount - p.passCount
+        passCount: p.passCount - p.passCount,
+        undoCount: p.undoCount - p.undoCount
       }))
       this.props.onPutStone(coor)
     }
@@ -84,6 +85,7 @@ class CustomBoard extends Component {
     }
 
   render() {
+    console.log(this.state);
     return (
       <LineWrap size={this.props.size}>
       <Wraper size={this.props.size}>
