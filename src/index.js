@@ -4,7 +4,9 @@ import ReactDOM from 'react-dom';
 import * as serviceWorker from './serviceWorker';
 // import './index.css';
 import {BrowserRouter as Router} from 'react-router-dom'
-import App from './components/App'
+
+// you need to install react-styled-flexboxgrid if you want use App component
+// import App from './components/App'
 import MyPage from './components/MyPage'
 import {createStore} from 'redux'
 import {Provider} from 'react-redux'

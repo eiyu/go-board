@@ -34,6 +34,5 @@ export const onUpdate = (coor, turns, state) => {
       over(lensToChain, uniq),
       updateEnemiesChain(coor, turns, opponents),
       preventSuicide(coor, subordinates),
-      // test(coor,turns)
     )(state)
 }

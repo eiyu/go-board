@@ -9,7 +9,6 @@
     "react-dom": "^16.7.0",
     "react-redux": "^6.0.1",
     "react-router-dom": "^4.3.1",
-    "react-styled-flexboxgrid": "^3.1.0",
     "redux": "^4.0.1",
     "styled-components": "^4.1.3"
   },
@@ -18,10 +17,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build && yarn run delete-maps",
-    "delete-maps": "yarn run delete-map-files && yarn run delete-references-to-map-files",
-    "delete-map-files": "find ./build -name '*.map' -delete",
-    "delete-references-to-map-files": "find ./build -regex '.*\\.\\(js\\|css\\)' -exec sed -i -E '\\/[\\*\\/]#\\ssourceMappingURL=main(\\.[0-9a-f]+)?\\.(css|js)\\.map(\\*\\/)?/g' {} +",
+    "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },

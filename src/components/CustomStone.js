@@ -1,6 +1,6 @@
 import React, {PureComponent} from 'react';
 import PropType from 'prop-types'
-
+import {Hoshi} from './styled/Hoshi'
 // try to figure out how to effectively optimize this later
 // the component depends on props.last which cause every coordinate rerender
 // because every click will change props.last
@@ -14,7 +14,8 @@ export default class CustomStone extends PureComponent {
       key={this.props.coor}
       onClick={() => this.props.game === 0 ? this.props.onRemove(this.props.coor) : this.props.onMove(this.props.coor)}
       >
-{this.props.value === '+' ? '+' : <img src={lastMove ? `./${this.props.color}-last.png` : `./${this.props.color}.png` } alt={this.props.color}/>}
+      {this.props.value === '+' ? '+' : <img src={lastMove ? `./${this.props.color}-last.png` : `./${this.props.color}.png` } alt={this.props.color}/>}
+      <Hoshi value={this.props.value} coor={this.props.coor} size={this.props.size}></Hoshi>
       </div>
     )
   }
