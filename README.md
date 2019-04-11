@@ -77,7 +77,7 @@ The demo has scoring feature, but when there is an eye inside seki that eye is c
 
 ## Contributor
 
-I'm Looking for contributor to make this app better
+-
 
 ## Installation
 * copy the repository
@@ -85,10 +85,15 @@ I'm Looking for contributor to make this app better
 * npm install / yarn install
 * try different node version if doesn't work
 
+## Having Installation Problem?
+* Copy components, actions and reducers to your existing react project
+* Happy Hacking.
+
 ## Authors
 
 * **Yuli** - *fullstack developer* - [Tuguta Holiday](https://tugutaholiday.com)
 ## License
 
-This project is licensed under the MIT License
+This project is licensed under the MIT License.
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).

@@ -1,6 +1,5 @@
 import React, {Component} from 'react'
 import PropType from 'prop-types'
-import {Grid,Col, Row} from 'react-styled-flexboxgrid'
 import {Wraper, Line, LineWrap} from './styled/Wraper'
 // import Col from './styled/Col'
 import CustomStone from './CustomStone'
