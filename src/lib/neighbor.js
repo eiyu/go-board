@@ -1,4 +1,5 @@
 import {curry, flatten, subtract} from 'ramda'
+// the n(north), w(west), s(south), e (east) is bit off 
 export const surround = (coor) => {
   const[row,col] = coor
   const n = [row-1, col]
